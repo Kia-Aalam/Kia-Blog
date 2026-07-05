@@ -63,9 +63,6 @@ https://templatemo.com/tm-551-stand-blog
                 <a class="nav-link" href="{% url 'blog' %}">Blog Entries</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'post-details' %}">Post Details</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
               </li>
             </ul>
@@ -95,7 +92,7 @@ https://templatemo.com/tm-551-stand-blog
                     <span>Uncategorized</span>
                   {% endif %}
                 </div>
-                <a href="{% url 'post-details' %}"><h4>{{ post.title }}</h4></a>
+                <a href="{% url 'post-details' post.id %}"><h4>{{ post.title }}</h4></a>
                 <ul class="post-info">
                   <li><a href="#">{{ post.writer }}</a></li>
                   <li><a href="#">{{ post.date }}</a></li>
@@ -144,7 +141,7 @@ https://templatemo.com/tm-551-stand-blog
                       {% else %}
                         <span>Uncategorized</span>
                       {% endif %}
-                      <a href="{% url 'post-details' %}"><h4>{{ post.title }}</h4></a>
+                      <a href="{% url 'post-details' post.id %}"><h4>{{ post.title }}</h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ post.writer }}</a></li>
                         <li><a href="#">{{ post.date }}</a></li>
@@ -205,7 +202,7 @@ https://templatemo.com/tm-551-stand-blog
                     <div class="content">
                       <ul>
                         {% for post in posts|slice:":5" %}
-                        <li><a href="{% url 'post-details' %}">
+                        <li><a href="{% url 'post-details' post.id %}">
                           <h5>{{ post.title }}</h5>
                           <span>{{ post.date }}</span>
                         </a></li>
