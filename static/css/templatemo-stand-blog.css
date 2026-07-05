@@ -408,10 +408,6 @@ header .navbar {
 
 /* Blog Posts */
 
-.blog-posts {
-	margin-top: 100px;
-}
-
 .blog-posts .blog-post {
 	margin-bottom: 30px;
 }
@@ -871,11 +867,6 @@ footer p a:hover {
 
 /* Contact Form */
 
-.contact-us .down-contact,
-.contact-us #map {
-	margin-top: 80px;
-}
-
 .contact-us .sidebar-heading h2 {
 	font-size: 18px;
 	text-transform: uppercase;
@@ -973,7 +964,6 @@ footer p a:hover {
 /* About Us */
 
 .about-us {
-	margin-top: 100px;
 	text-align: center;
 }
 
