@@ -13,8 +13,7 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='img',
         null=True,
-        blank=True,
-        default='static/img/about-us.jpg'
+        blank=True
     )
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)

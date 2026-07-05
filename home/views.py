@@ -13,6 +13,7 @@ def blog(request):
     return render(request, 'blog.html')
 
 def post_details(request):
+    # views
     return render(request, 'post-details.html')
 
 def contact(request):
