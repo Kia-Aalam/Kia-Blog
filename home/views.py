@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post, Category, Message
+from .models import Post, Category, SocialMediaLink, Message
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
@@ -26,7 +26,9 @@ def post_details(request, id):
     categories = Category.objects.all()
     recent_posts = Post.objects.exclude(id=id).order_by('-date')[:5]
     
-    return render(request, 'post-details.html', context={'post':post, 'categories': categories, 'recent_posts': recent_posts})
+    social_media_links = SocialMediaLink.objects.filter(post=post)
+    
+    return render(request, 'post-details.html', context={'post':post, 'categories': categories, 'recent_posts': recent_posts, 'social_media_links': social_media_links })
 
 def contact(request):
     if request.method == 'POST':

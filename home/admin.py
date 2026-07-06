@@ -1,6 +1,14 @@
 from django.contrib import admin
-from .models import Post, Category, Message
+from .models import Post, Category, SocialMediaLink, Message
 
-admin.site.register(Post)
+class SocialMediaLinkInline(admin.TabularInline):
+    model = SocialMediaLink
+    extra = 1 
+
+class PostAdmin(admin.ModelAdmin):
+    inlines = [SocialMediaLinkInline]
+
+admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
+admin.site.register(SocialMediaLink)
 admin.site.register(Message)

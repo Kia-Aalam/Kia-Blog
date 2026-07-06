@@ -129,8 +129,13 @@ https://templatemo.com/tm-551-stand-blog
                           <div class="col-6">
                             <ul class="post-share">
                               <li><i class="fa fa-share-alt"></i></li>
-                              <li><a href="#">Facebook</a>,</li>
-                              <li><a href="#"> Twitter</a></li>
+                              {% if social_media_links %}
+                                {% for social_media in social_media_links %}
+                                  <li><a href="{{ social_media.url }}" target="_blank">{{ social_media.name }}</a></li>
+                                {% endfor %}
+                              {% else %}
+                                <li>No social media links available.</li>
+                              {% endif %}
                             </ul>
                           </div>
                         </div>

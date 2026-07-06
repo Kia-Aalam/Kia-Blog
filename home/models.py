@@ -24,6 +24,14 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+class SocialMediaLink(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='social_media_links')
+    name = models.CharField(max_length=50) 
+    url = models.URLField()
+
+    def __str__(self):
+        return f"{self.name} - {self.post.title}"
+    
 class Message(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField()
