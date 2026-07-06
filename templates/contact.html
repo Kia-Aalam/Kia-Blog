@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="{% static "css/fontawesome.css" %}">
     <link rel="stylesheet" href="{% static "css/templatemo-stand-blog.css" %}">
     <link rel="stylesheet" href="{% static "css/owl.css" %}">
+
+    <!-- Sent Message Alert -->
+    <link rel="stylesheet" href="{% static "css/sent_message.css" %}">
 <!--
 
 TemplateMo 551 Stand Blog
@@ -100,6 +103,19 @@ https://templatemo.com/tm-551-stand-blog
                     <div class="sidebar-heading">
                       <h2>Send us a message</h2>
                     </div>
+                    {% if messages %}
+                      {% for message in messages %}
+                      <div id="customAlert" class="custom-alert-overlay">
+                          <div class="custom-alert-box">
+                              <p class="custom-alert-title">Message Sent</p>
+                              <p class="custom-alert-text">{{ message }}</p>
+                              <div class="custom-alert-actions">
+                                  <button class="custom-alert-btn" onclick="document.getElementById('customAlert').style.display='none'">OK</button>
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                    {% endif %}
                     <div class="content">
                       <form id="contact" action="" method="post">
                         {% csrf_token %}

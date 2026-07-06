@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Post, Category, Message
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 def home(request):
     posts = Post.objects.all()
@@ -34,4 +35,8 @@ def contact(request):
             new_message = Message(name=name, email=email, subject=subject, message=message)
             new_message.save()
             
+            messages.success(request, "Your message has been sent successfully!")
+        else:
+            messages.error(request, "Your message could not be sent! Please again send your message.")
+        
     return render(request, 'contact.html')
