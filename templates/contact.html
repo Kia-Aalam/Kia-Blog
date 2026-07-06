@@ -102,6 +102,7 @@ https://templatemo.com/tm-551-stand-blog
                     </div>
                     <div class="content">
                       <form id="contact" action="" method="post">
+                        {% csrf_token %}
                         <div class="row">
                           <div class="col-md-6 col-sm-12">
                             <fieldset>
@@ -141,17 +142,12 @@ https://templatemo.com/tm-551-stand-blog
                     <div class="content">
                       <ul>
                         <li>
-                          <h5>090-484-8080</h5>
-                          <span>PHONE NUMBER</span>
+                          <h5><a href="https://github.com/Kia-Aalam" target="_blank">Kia Aalam</a></h5>
+                          <span>GitHub Profile</span>
                         </li>
                         <li>
-                          <h5>info@company.com</h5>
+                          <h5><a href="mailto:kiaaalam7@gmail.com">kiaaalam7@gmail.com</a></h5>
                           <span>EMAIL ADDRESS</span>
-                        </li>
-                        <li>
-                          <h5>123 Aenean id posuere dui, 
-                          	<br>Praesent laoreet 10660</h5>
-                          <span>STREET ADDRESS</span>
                         </li>
                       </ul>
                     </div>

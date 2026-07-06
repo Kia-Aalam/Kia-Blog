@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post, Category
+from .models import Post, Category, Message
 from django.shortcuts import get_object_or_404
 
 def home(request):
@@ -24,4 +24,14 @@ def post_details(request, id):
     return render(request, 'post-details.html', context={'post':post, 'categories': categories, 'recent_posts': recent_posts})
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        if name and email and subject and message:
+            new_message = Message(name=name, email=email, subject=subject, message=message)
+            new_message.save()
+            
     return render(request, 'contact.html')
