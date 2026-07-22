@@ -54,7 +54,11 @@
             <div class="signup-link">
               Not a member? <a href="">Signup now</a>
             </div>
+            <div class="signup-link">
+              Back to home page? <a href="{% url 'home' %}">Home</a>
+            </div>
           </form>
+          <!-- Signup -->
           <form class="signup" method="post">
             {% csrf_token %}
             <div class="field">
