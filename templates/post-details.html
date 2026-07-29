@@ -205,7 +205,7 @@
                     <div class="content">
                       <ul>
                         {% for category in categories %}
-                        <li>- {{ category.name }}</li>
+                        <li><a href="{% url 'category_recent' category.id %}">- {{ category.name }}</a></li>
                         {% empty %}
                         <li>No categories yet</li>
                         {% endfor %}

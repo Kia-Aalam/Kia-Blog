@@ -11,12 +11,23 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+#
 def blog(request):
     posts = Post.objects.all()
     categories = Category.objects.all()
     recent_posts = Post.objects.all().order_by('-date')[:5]
     
     return render(request, 'blog.html', context={'posts':posts, 'categories': categories, 'recent_posts': recent_posts})
+
+def category_recent(request, id):
+    recent_posts = Post.objects.all().order_by('-date')[:5]
+    categories = Category.objects.all()
+    
+    category = get_object_or_404(Category, id=id)
+    posts = category.post_set.all()
+
+    return render(request, 'blog.html', context={'posts':posts, 'categories': categories, 'recent_posts': recent_posts})
+#
 
 def post_details(request, id):
     post = get_object_or_404(Post, id=id)
