@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Post, Category, SocialMediaLink, Message
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 def home(request):
     posts = Post.objects.all()
@@ -17,7 +18,11 @@ def blog(request):
     categories = Category.objects.all()
     recent_posts = Post.objects.all().order_by('-date')[:5]
     
-    return render(request, 'blog.html', context={'posts':posts, 'categories': categories, 'recent_posts': recent_posts})
+    page = request.GET.get('page')
+    paginator = Paginator(posts, 2)
+    page_paginator = paginator.get_page(page)
+    
+    return render(request, 'blog.html', context={'posts':page_paginator, 'categories': categories, 'recent_posts': recent_posts})
 
 def category_recent(request, id):
     recent_posts = Post.objects.all().order_by('-date')[:5]

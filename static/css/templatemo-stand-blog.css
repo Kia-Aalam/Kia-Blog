@@ -560,7 +560,7 @@ ul.page-numbers li a {
 	transition: all 0.3s;
 }
 
-ul.page-numbers li.active a {
+ul.page-numbers li.active a{
 	background-color: #f48840;
 	border-color: #f48840;
 	color: #fff;

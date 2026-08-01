@@ -15,10 +15,13 @@ class Post(models.Model):
         blank=True
     )
     content = models.TextField()
-    category = models.ManyToManyField(Category, null=True, blank=True)
+    category = models.ManyToManyField(Category, blank=True)
     writer = models.CharField(max_length=100)
     date = models.DateField(default=date.today)
     view = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ('-id',)
 
     def __str__(self):
         return self.title
