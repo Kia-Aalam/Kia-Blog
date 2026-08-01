@@ -17,7 +17,11 @@ def blog(request):
     posts = Post.objects.all()
     categories = Category.objects.all()
     recent_posts = Post.objects.all().order_by('-date')[:5]
-    
+    # Search
+    q = request.GET.get('q')
+    if q :
+        posts = Post.objects.filter(title__icontains=q)
+    # Pagination
     page = request.GET.get('page')
     paginator = Paginator(posts, 2)
     page_paginator = paginator.get_page(page)
