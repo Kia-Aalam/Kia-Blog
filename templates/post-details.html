@@ -46,6 +46,11 @@
                       <ul class="post-info">
                         <li><a href="#">{{ post.writer }}</a></li>
                         <li><a href="#">{{ post.date }}</a></li>
+                        <!--{% if request.user.like %}
+                          <li><a href=""><i class="fa fa-heart-o" style="color: red;">1</i></a></li>
+                        {% else %}
+                          <li><a href=""><i class="fa fa-heart" style="color: red;">1</i></a></li>
+                        {% endif %}-->
                         <li><a href="#">{{ post.view }} views</a></li>
                       </ul>
                       <p>{{ post.content|linebreaks }}</p>

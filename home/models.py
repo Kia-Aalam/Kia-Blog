@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.conf import settings # User
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Category name")
@@ -42,3 +43,10 @@ class Message(models.Model):
     
     def __str__(self):
         return f"{self.name}/{self.subject[:10]}"
+    
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="Likes")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="Likes")
+    
+    def __str__(self):
+        return f'{self.user} | {self.post}'
