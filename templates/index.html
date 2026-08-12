@@ -69,7 +69,7 @@ https://templatemo.com/tm-551-stand-blog
                   <a class="nav-link" style="color: green;" href="{% url 'login' %}">Login</a>
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" style="color:red;" href="">Logout</a>
+                  <a class="nav-link" style="color:red;" href="{% url 'logout' %}">Logout</a>
               {% endif %}
               </li>
             </ul>
