@@ -46,11 +46,26 @@
                       <ul class="post-info">
                         <li><a href="#">{{ post.writer }}</a></li>
                         <li><a href="#">{{ post.date }}</a></li>
-                        <!--{% if request.user.like %}
-                          <li><a href=""><i class="fa fa-heart-o" style="color: red;">1</i></a></li>
+                        <!-- Like -->
+                        <li>
+                        {% if user.is_authenticated %}
+                          {% if user_liked %}
+                            <a href="{% url 'like' post.id %}">
+                              <i class="fa-solid fa-heart" style="color: #f48840;"></i>
+                            </a>
+                          {% else %}
+                            <a href="{% url 'like' post.id %}">
+                              <i class="fa-regular fa-heart" style="color: #f48840;"></i>
+                            </a>
+                          {% endif %}
                         {% else %}
-                          <li><a href=""><i class="fa fa-heart" style="color: red;">1</i></a></li>
-                        {% endif %}-->
+                          <a href="{% url 'login' %}">
+                            <i class="fa-regular fa-heart" style="color: #f48840;"></i>
+                          </a>
+                        {% endif %}
+                        <span>{{ post.Likes.count }}</span>
+                        </li>
+
                         <li><a href="#">{{ post.view }} views</a></li>
                       </ul>
                       <p>{{ post.content|linebreaks }}</p>

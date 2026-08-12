@@ -9,6 +9,7 @@ urlpatterns = [
     path('blog/', views.blog, name='blog'),
     path('blog/<int:id>', views.category_recent, name="category_recent"),
     path('post_details/<int:id>', views.post_details, name='post-details'),
+    path('Like_post/<int:id>', views.LikeView, name='like'),
     path('contact/', views.contact, name='contact'),
 ]
 if settings.DEBUG:

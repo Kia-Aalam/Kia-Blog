@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Category, SocialMediaLink, Message, Like
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     posts = Post.objects.all()
@@ -48,8 +49,28 @@ def post_details(request, id):
     
     social_media_links = SocialMediaLink.objects.filter(post=post)
 
+    # Like
+    if request.user.is_authenticated:
+        user_liked = Like.objects.filter(
+            user=request.user,
+            post=post
+        ).exists()
+    else:
+        user_liked = False
     
-    return render(request, 'post-details.html', context={'post':post, 'categories': categories, 'recent_posts': recent_posts, 'social_media_links': social_media_links })
+    return render(request, 'post-details.html' , context={'post':post, 'categories': categories, 'recent_posts': recent_posts, 'social_media_links': social_media_links, 'user_liked':user_liked })
+
+@login_required
+def LikeView(request, id):
+    post = get_object_or_404(Post, id=id)
+    
+    like = Like.objects.filter(user=request.user, post=post)
+    if like.exists():
+        like.delete()
+    else:
+        Like.objects.create(user=request.user, post=post)
+    
+    return redirect('post-details', id=post.id)
 
 def contact(request):
     if request.method == 'POST':
