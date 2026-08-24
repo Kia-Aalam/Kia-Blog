@@ -37,7 +37,7 @@
                       {% endif %}
                     </div>
                     <div class="down-content">
-                      {% if post.category %}
+                      {% if post.category %} <!--///-->
                         <span>{{ post.category.name }}</span>
                       {% else %}
                         <span>Uncategorized</span>
@@ -50,11 +50,11 @@
                         <li>
                         {% if user.is_authenticated %}
                           {% if user_liked %}
-                            <a href="{% url 'like' post.id %}">
+                            <a href="{% url 'like' post.slug %}">
                               <i class="fa-solid fa-heart" style="color: #f48840;"></i>
                             </a>
                           {% else %}
-                            <a href="{% url 'like' post.id %}">
+                            <a href="{% url 'like' post.slug %}">
                               <i class="fa-regular fa-heart" style="color: #f48840;"></i>
                             </a>
                           {% endif %}
@@ -74,8 +74,12 @@
                           <div class="col-6">
                             <ul class="post-tags">
                               <li><i class="fa fa-tags"></i></li>
-                              {% if post.category %}
-                                <li><a href="#">{{ post.category.name }}</a></li>
+                              {% if post.category.all %}
+                                {% for cat in post.category.all %}
+                                  <li><span>{{ cat.name }}</span></li>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                              {% else %}
+                                <li><span>Uncategorized</span></li>
                               {% endif %}
                             </ul>
                           </div>
@@ -206,7 +210,7 @@
                     <div class="content">
                       <ul>
                         {% for recent_post in recent_posts %}
-                        <li><a href="{% url 'post-details' recent_post.id %}">
+                        <li><a href="{% url 'post-details' recent_post.slug %}">
                           <h5>{{ recent_post.title }}</h5>
                           <span>{{ recent_post.date }}</span>
                         </a></li>
@@ -225,7 +229,7 @@
                     <div class="content">
                       <ul>
                         {% for category in categories %}
-                        <li><a href="{% url 'category_recent' category.id %}">- {{ category.name }}</a></li>
+                        <li><a href="{% url 'category_recent' category.slug %}">- {{ category.name }}</a></li>
                         {% empty %}
                         <li>No categories yet</li>
                         {% endfor %}

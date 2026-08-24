@@ -7,9 +7,15 @@ class SocialMediaLinkInline(admin.TabularInline):
 
 class PostAdmin(admin.ModelAdmin):
     inlines = [SocialMediaLinkInline]
+    list_display = ("title",)
+    prepopulated_fields = {"slug": ("title",)}
+    
+class CategoryAdmin(admin.ModelAdmin):  
+    list_display = ("name", "slug")
+    prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(SocialMediaLink)
 admin.site.register(Message)
 admin.site.register(Like)

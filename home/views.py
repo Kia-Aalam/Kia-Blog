@@ -13,7 +13,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-#
+# ---
 def blog(request):
     posts = Post.objects.all()
     categories = Category.objects.all()
@@ -29,23 +29,23 @@ def blog(request):
     
     return render(request, 'blog.html', context={'posts':page_paginator, 'categories': categories, 'recent_posts': recent_posts})
 
-def category_recent(request, id):
+def category_recent(request, slug):
     recent_posts = Post.objects.all().order_by('-date')[:5]
     categories = Category.objects.all()
     
-    category = get_object_or_404(Category, id=id)
+    category = get_object_or_404(Category, slug=slug)
     posts = category.post_set.all()
 
     return render(request, 'blog.html', context={'posts':posts, 'categories': categories, 'recent_posts': recent_posts})
-#
+# ---
 
-def post_details(request, id):
-    post = get_object_or_404(Post, id=id)
+def post_details(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     post.view += 1
     post.save()
     
     categories = Category.objects.all()
-    recent_posts = Post.objects.exclude(id=id).order_by('-date')[:5]
+    recent_posts = Post.objects.exclude(id=post.id).order_by('-date')[:5]
     
     social_media_links = SocialMediaLink.objects.filter(post=post)
 
@@ -61,8 +61,8 @@ def post_details(request, id):
     return render(request, 'post-details.html' , context={'post':post, 'categories': categories, 'recent_posts': recent_posts, 'social_media_links': social_media_links, 'user_liked':user_liked })
 
 @login_required
-def LikeView(request, id):
-    post = get_object_or_404(Post, id=id)
+def LikeView(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     
     like = Like.objects.filter(user=request.user, post=post)
     if like.exists():
@@ -70,7 +70,7 @@ def LikeView(request, id):
     else:
         Like.objects.create(user=request.user, post=post)
     
-    return redirect('post-details', id=post.id)
+    return redirect('post-details', slug=post.slug)
 
 def contact(request):
     if request.method == 'POST':

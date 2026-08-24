@@ -7,9 +7,9 @@ urlpatterns = [
     path('', views.home, name='home'), 
     path('about/', views.about, name='about'),
     path('blog/', views.blog, name='blog'),
-    path('blog/<int:id>', views.category_recent, name="category_recent"),
-    path('post_details/<int:id>', views.post_details, name='post-details'),
-    path('Like_post/<int:id>', views.LikeView, name='like'),
+    path('blog/<slug:slug>', views.category_recent, name="category_recent"),
+    path('post_details/<slug:slug>', views.post_details, name='post-details'),
+    path('LikeView/<slug:slug>', views.LikeView, name='like'),
     path('contact/', views.contact, name='contact'),
 ]
 if settings.DEBUG:

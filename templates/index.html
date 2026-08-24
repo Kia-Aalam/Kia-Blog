@@ -100,7 +100,7 @@ https://templatemo.com/tm-551-stand-blog
                     <span>Uncategorized</span>
                   {% endif %}
                 </div>
-                <a href="{% url 'post-details' post.id %}"><h4>{{ post.title }}</h4></a>
+                <a href="{% url 'post-details' post.slug %}"><h4>{{ post.title }}</h4></a>
                 <ul class="post-info">
                   <li><a href="#">{{ post.writer }}</a></li>
                   <li><a href="#">{{ post.date }}</a></li>
@@ -149,7 +149,7 @@ https://templatemo.com/tm-551-stand-blog
                       {% else %}
                         <span>Uncategorized</span>
                       {% endif %}
-                      <a href="{% url 'post-details' post.id %}"><h4>{{ post.title }}</h4></a>
+                      <a href="{% url 'post-details' post.slug %}"><h4>{{ post.title }}</h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ post.writer }}</a></li>
                         <li><a href="#">{{ post.date }}</a></li>
@@ -161,13 +161,17 @@ https://templatemo.com/tm-551-stand-blog
                           <div class="col-6">
                             <ul class="post-tags">
                               <li><i class="fa fa-tags"></i></li>
-                              {% if post.category %}
-                                <li><a href="#">{{ post.category.name }}</a></li>
+                              {% if post.category.all %}
+                                {% for cat in post.category.all %}
+                                  <li><span>{{ cat.name }}</span></li>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                              {% else %}
+                                <li><span>Uncategorized</span></li>
                               {% endif %}
                             </ul>
                           </div>
                           <div class="col-6">
-                            <ul class="post-share">
+                            <ul class="post-share"> <!-- /// -->
                               <li><i class="fa fa-share-alt"></i></li>
                               <li><a href="#">Facebook</a>,</li>
                               <li><a href="#"> Twitter</a></li>
@@ -212,7 +216,7 @@ https://templatemo.com/tm-551-stand-blog
                     <div class="content">
                       <ul>
                         {% for post in posts|slice:":5" %}
-                        <li><a href="{% url 'post-details' post.id %}">
+                        <li><a href="{% url 'post-details' post.slug %}">
                           <h5>{{ post.title }}</h5>
                           <span>{{ post.date }}</span>
                         </a></li>
@@ -231,9 +235,9 @@ https://templatemo.com/tm-551-stand-blog
                     <div class="content">
                       <ul>
                         {% for category in categories %}
-                        <li>- {{ category.name }}</li>
+                          <li><a href="{% url 'category_recent' category.slug %}">- {{ category.name }}</a></li>
                         {% empty %}
-                        <li>No categories yet</li>
+                          <li>No categories yet.</li>
                         {% endfor %}
                       </ul>
                     </div>

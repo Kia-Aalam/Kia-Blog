@@ -38,10 +38,10 @@
                       {% endif %}
                     </div>
                     <div class="down-content">
-                      {% if post.category %}
+                      {% if post.category %} <!--//-->
                       <span>{{ post.category.name }}</span>
                       {% endif %}
-                      <a href="{% url 'post-details' post.id %}"><h4>{{ post.title }}</h4></a>
+                      <a href="{% url 'post-details' post.slug %}"><h4>{{ post.title }}</h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ post.writer }}</a></li>
                         <li><a href="#">{{ post.date }}</a></li>
@@ -78,7 +78,7 @@
                     <div class="content">
                       <ul>
                         {% for recent in recent_posts %}
-                        <li><a href="{% url 'post-details' recent.id %}">
+                        <li><a href="{% url 'post-details' recent.slug %}">
                           <h5>{{ recent.title }}</h5>
                           <span>{{ recent.date }}</span>
                         </a></li>
@@ -97,7 +97,7 @@
                     <div class="content">
                       <ul>
                         {% for category in categories %}
-                        <li><a href="{% url 'category_recent' category.id %}">- {{ category.name }}</a></li>
+                        <li><a href="{% url 'category_recent' category.slug %}">- {{ category.name }}</a></li>
                         {% empty %}
                         <li>No categories yet.</li>
                         {% endfor %}
