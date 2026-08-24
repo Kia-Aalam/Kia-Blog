@@ -144,8 +144,8 @@ https://templatemo.com/tm-551-stand-blog
                       {% endif %}
                     </div>
                     <div class="down-content">
-                      {% if post.category %}
-                        <span>{{ post.category.name }}</span>
+                      {% if post.category.all %}
+                        <span>{{ post.category.all.0.name }}</span>
                       {% else %}
                         <span>Uncategorized</span>
                       {% endif %}

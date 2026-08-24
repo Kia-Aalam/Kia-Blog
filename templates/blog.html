@@ -38,8 +38,10 @@
                       {% endif %}
                     </div>
                     <div class="down-content">
-                      {% if post.category %} <!--//-->
-                      <span>{{ post.category.name }}</span>
+                      {% if post.category.all %}
+                        <span>{{ post.category.all.0.name }}</span>
+                      {% else %}
+                        <span>Uncategorized</span>
                       {% endif %}
                       <a href="{% url 'post-details' post.slug %}"><h4>{{ post.title }}</h4></a>
                       <ul class="post-info">
